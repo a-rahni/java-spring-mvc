@@ -16,16 +16,22 @@
                 <th>Nom</th>
                 <th>Quantité</th>
                 <th>Prix</th>
+                <th>Acheter</th>
             </tr>
-
-            <c:forEach var="product" items="${products}">
-                <tr>
-                    <td><c:out value="${product.getId()}"/></td>
-                    <td><c:out value="${product.getName()}"/></td>
-                    <td><c:out value="${product.getQuantity()}"/></td>
-                    <td><c:out value="${product.getPrice()}"/></td>
-                </tr>
-            </c:forEach>
+            <form:form method="POST" action="/buyProduct" modelAttribute="buyForm">
+                <c:forEach var="product" items="${products}">
+                    <tr>
+                        <td><c:out value="${product.getId()}"/>
+                            <form:input path="idProduct" value="${product.getId()}" hidden="true" type="number" /> <!-- hiddden, juste pour garder-->
+                            <form:input path="quantity" value="1" hidden="true" type="number" /> <!-- hiddden, juste pour garder-->
+                        </td>
+                        <td><c:out value="${product.getName()}"/></td>
+                        <td><c:out value="${product.getQuantity()}"/></td>
+                        <td><c:out value="${product.getPrice()}"/></td>
+                        <td><input type="submit" value="buy"/></td>
+                    </tr>
+                </c:forEach>
+            </form:form>
         </table>
         
         <br />
